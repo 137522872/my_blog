@@ -31,4 +31,17 @@ Route::group('admin',function(){
     Route::rule('/$','admin/index/login','get|post');
     Route::rule('register','admin/index/register','get|post');
     Route::rule('forget','admin/index/forget','get|post');
+    Route::rule('reset','admin/index/reset','post');
+    Route::rule('index','admin/home/index','get');
+    Route::rule('logout','admin/home/logout','post');
+    Route::rule('cateList','admin/cate/cateList','get');
+    Route::rule('cateadd','admin/cate/add','get|post');
+    Route::rule('sort','admin/cate/sort','post');
+    Route::rule('cateedit/[:id]','admin/cate/edit','get|post');
+    Route::rule('catedel','admin/cate/del','post');
+    Roete:rule('articlelist','admin/article/list','get');
+    Route::rule('articleadd','admin/article/add','get|post');
+
+
+
 });

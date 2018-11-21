@@ -72,4 +72,29 @@ class Admin extends Model
         }
     }
 
+    //重置密码
+    public function reset($data){
+
+        $validata = new \app\common\validate\Admin();
+
+        if(!$validata->scene('reset')->check($data)){
+            return $validata->getError();
+        }
+
+        if($data['code'] !=session('code')){
+            return '验证码不正确';
+        }
+        $adminInfo = $this->where('email',$data['email'])->find();
+        $password = mt_rand(10000,999999);
+        $adminInfo->password = $password;
+        $result = $adminInfo->save();
+        if($result){
+            sendMail($data['email'],'密码重置成功','新密码: '.$adminInfo['password']);
+            return 1;
+        }else{
+            return '重置密码失败';
+        }
+
+
+    }
 }

@@ -37,6 +37,7 @@ function sendMail($to,$title,$content){
         $mail->Subject = $title;
         $mail->Body    = $content;
         $mail->send();
+        return 1;
     }catch (Exception $e){
         excption('Mailer Error: ' . $mail->ErrorInfo);
     }
