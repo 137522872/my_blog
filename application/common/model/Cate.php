@@ -11,6 +11,11 @@ class Cate extends Model
     use SoftDelete;
     protected $deleteTime = 'delete_time';
 
+    //关联文章
+    public function article(){
+        return $this->hasMany('Article','cate_id','id');
+    }
+
     //栏目添加
     public function add($data){
 

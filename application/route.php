@@ -39,9 +39,11 @@ Route::group('admin',function(){
     Route::rule('sort','admin/cate/sort','post');
     Route::rule('cateedit/[:id]','admin/cate/edit','get|post');
     Route::rule('catedel','admin/cate/del','post');
-    Roete:rule('articlelist','admin/article/list','get');
+    Route::rule('articlelist','admin/article/lists','get');
     Route::rule('articleadd','admin/article/add','get|post');
-
-
-
+    Route::rule('articletop','admin/article/top','post');
+    Route::rule('articleedit/[:id]','admin/article/edit','get|post');
+    Route::rule('articledel','admin/article/del','post');
+    Route::rule('memberlist','admin/menber/list','get');
+    Route::rule('memberadd','admin/menber/add','get|post');
 });

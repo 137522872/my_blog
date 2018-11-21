@@ -89,8 +89,8 @@ class Cate extends Controller
     //栏目删除
     public function del(){
 
-//        $cateInfo = model('Cate')->find(input('post.id'));
         $result= \app\common\model\Cate::destroy(input('post.id'));
+
         if($result){
             $this->success('栏目删除成功','admin/cate/cateList');
         }else{
