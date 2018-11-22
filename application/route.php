@@ -50,6 +50,9 @@ Route::group('admin',function(){
     Route::rule('memberdel','admin/member/del','post');
     Route::rule('adminlist','admin/admin/lists','get');
     Route::rule('adminadd','admin/admin/add','get|post');
-
-
+    Route::rule('adminstatus','admin/admin/status','post');
+    Route::rule('adminedit/[:id]','admin/admin/edit','get|post');
+    Route::rule('admindel','admin/admin/del','post');
+    Route::rule('comment','admin/commnet/lists','get|post');
+    Route::rule('add','admin/commnet/add','get|post');
 });

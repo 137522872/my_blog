@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use PHPMailer\PHPMailer\PHPMailer;
 use think\Controller;
 
-class Member extends Controller
+class Member extends Base
 {
     //会员列表
     public function lists(){

@@ -9,6 +9,7 @@ class Admin extends Model
 {
     //软删除
     use SoftDelete;
+    protected $deletTime = 'delete_time';
 
     //只读字段
     protected $readonly = ['email'];
@@ -97,4 +98,50 @@ class Admin extends Model
 
 
     }
+
+    //添加管理员
+    public function add($data){
+
+        $validate = new \app\common\validate\Admin();
+        if(!$validate->scene('add')->check($data)){
+            return $validate->getError();
+        }
+
+
+        unset($data['conpass']);
+        $data['status'] =0;
+        $data['is_super']=0;
+        $result = $this->save($data);//Admin::create($data);
+
+        if($result){
+            return 1;
+        }else{
+            return '添加管理员失败1';
+        }
+    }
+
+    //编辑
+    public function edit($data){
+
+        $validate = new \app\common\validate\Admin();
+        if(!$validate->scene('edit')->check($data)){
+            return $validate->getError();
+        }
+        $adminInfo = $this->find($data['id']);
+        if($data['oldpass'] != $adminInfo['password']){
+            return '原密码不正确';
+        }
+
+        $adminInfo->password = $data['newpass'];
+        $adminInfo->nickname = $data['nickname'];
+
+        $result = $adminInfo->save();
+        if($result){
+            return 1;
+        }else{
+            return '管理员修改失败';
+        }
+
+    }
+
 }
