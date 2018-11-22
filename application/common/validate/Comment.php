@@ -9,7 +9,10 @@
 namespace app\common\validate;
 
 
-class Comment
+use think\Validate;
+
+class Comment extends Validate
 {
+
 
 }

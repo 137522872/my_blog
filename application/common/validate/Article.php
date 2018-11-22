@@ -21,6 +21,7 @@ class Article extends Validate
         'desc|文章概要'  => 'require',
         'content|内容'  =>  'require',
         'is_top|推荐'   =>  'require',
+        'author|作者'   =>  'require',
     ];
 
     protected $scene =[

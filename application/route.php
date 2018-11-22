@@ -24,7 +24,9 @@ use think\Route;
 //      '/' => ['admin/index/login',['methon'=>'get']],
 //    ],
 //];
-
+Route::rule('cate/:id','index/index/index','get');
+Route::rule('/','index/index/index','get');
+Route::rule('article/:id','index/article/info','get');
 
 Route::group('admin',function(){
 
@@ -53,6 +55,8 @@ Route::group('admin',function(){
     Route::rule('adminstatus','admin/admin/status','post');
     Route::rule('adminedit/[:id]','admin/admin/edit','get|post');
     Route::rule('admindel','admin/admin/del','post');
-    Route::rule('comment','admin/commnet/lists','get|post');
-    Route::rule('add','admin/commnet/add','get|post');
+    Route::rule('comment','admin/comment/lists','get|post');
+    Route::rule('add','admin/comment/add','get|post');
+    Route::rule('del','admin/comment/del','get|post');
+    Route::rule('set','admin/system/set','get|post');
 });

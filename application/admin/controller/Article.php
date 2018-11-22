@@ -85,6 +85,7 @@ class Article extends Base
                 'cate_id'=> input('post.cateid'),
                 'desc' => input('post.desc'),
                 'content' => input('post.content'),
+                'author'   => input('post.author'),
             ];
 
             $result = model('Article')->edit($data);

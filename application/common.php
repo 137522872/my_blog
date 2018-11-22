@@ -42,3 +42,8 @@ function sendMail($to,$title,$content){
         excption('Mailer Error: ' . $mail->ErrorInfo);
     }
 }
+
+//把字符串转换成数组
+function strToArray($data){
+    return explode('|',$data);
+}

@@ -77,6 +77,7 @@ class Member extends Base
 
         $memberInfo = model('Member')->find(input('post.id'));
         $result = \app\common\model\Member::destroy($memberInfo->id);
+
         if($result){
             return $this->success('删除成功','admin/member/lists');
         }else{
