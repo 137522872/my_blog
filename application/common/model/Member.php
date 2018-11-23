@@ -66,4 +66,42 @@ class Member extends Model
 
 
     }
+
+    //会员注册
+    public function register($data){
+        $validate = new \app\common\validate\Member();
+
+        if(!$validate->scene('register')->check($data)){
+            return $validate->getError();
+        }
+        unset($data['conpass']);
+        unset($data['verify']);
+        $result = Member::create($data);
+        if($result){
+            return 1;
+        }else{
+            return '注册失败';
+        }
+    }
+
+    //登录
+    public function login($data){
+        $validate = new \app\common\validate\Member();
+        if(!$validate->scene('login')->check($data)){
+            return $validate->getError();
+        }
+
+        unset($data['verify']);
+        $result = $this->where($data)->find();
+        if($result){
+            $sessionData =[
+                'id' => $result['id'],
+                'nickname' => $result['nickname'],
+            ];
+            session('index',$sessionData);
+            return 1;
+        }else{
+            return '用户名或者密码错误';
+        }
+    }
 }

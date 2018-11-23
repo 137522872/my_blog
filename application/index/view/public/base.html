@@ -30,16 +30,21 @@
                 {/volist}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登录</a></li>
-                <li><a href="#">注册</a></li>
+                {if session('?index.id')}
+                    <li><a href="#">{:session('index.nickname')}</a></li>
+                    <li><a href="#" id="logout">退出</a></li>
+                {else /}
+                    <li><a href="{:url('index/index/login')}">登录</a></li>
+                    <li><a href="{:url('index/index/register')}">注册</a></li>
+                {/if}
                 <li><a href="#">投稿</a></li>
             </ul>
-            <form action="#" class="navbar-form navbar-right">
+            <form action="{:url('index/index/search')}" class="navbar-form navbar-right">
                 <div class="form-group">
-                    <input type="text" class="form-control input-sm" id="search" name="search" placeholder="搜索" />
+                    <input type="text" class="form-control input-sm" id="search" name="keyword" placeholder="搜索" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default btn-sm">搜索</button>
+                    <button class="btn btn-default btn-sm" type="submit" >搜索</button>
                 </div>
             </form>
         </div>
@@ -48,16 +53,49 @@
 <div class="container">
     {block name="content"}
 
-
     {/block}
 </div>
+{block name="footer"}
 <div class="footer">
     <p>Copyright 2018<a href="#">{$webInfo.copyright} </a> All Rights Reserved</p>
 </div>
-
+{/block}
 <script src="/public/static/index/js/jquery-3.3.1.min.js"></script>
 <script src="/public/static/index/js/bootstrap.min.js"></script>
+<script src="/public/static/lib/layer/layer.js"></script>
+
+<script>
+    $(function () {
+        $("#logout").click(function () {
+
+            $.ajax({
+                url:"{:url('index/index/logout')}",
+                type:'post',
+                dataType:'json',
+                success:function (data) {
+                    if(data.code==1){
+                        layer.msg(data.msg,{
+                            icon:6,
+                            time:2000
+                        },function () {
+                            location.href = data.url;
+                        });
+                    }else{
+                        layer.open({
+                            title:'退出失败',
+                            icon:5,
+                            anim:6,
+                            content:data.msg
+                        })
+                    }
+                }
+            })
+            return false;
+        })
+    })
+</script>
 {block name="js"}
+
 {/block}
 </body>
 </html>

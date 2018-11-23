@@ -20,5 +20,20 @@ class Comment extends Model
         return $this->belongsTo('Member','member_id','id');
     }
 
+    //添加评论
+    public function comm($data){
+
+        $validate = new \app\common\validate\Comment();
+        if(!$validate->scene('comm')->check($data)){
+            return $validate->getError();
+        }
+
+        $result = Comment::create($data);
+        if($result){
+            return 1;
+        }else{
+            return '评论失败了';
+        }
+    }
 
 }
